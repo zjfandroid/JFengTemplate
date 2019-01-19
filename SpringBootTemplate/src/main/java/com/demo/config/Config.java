@@ -13,9 +13,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-/**
- * Created by joezou on 2017/3/2.
- */
 @SpringBootApplication
 @Configuration
 @EnableSwagger2 //Enable swagger 2.0 spec
@@ -36,7 +33,7 @@ public class Config {
                 .title("Demo API")
                 .description("测试接口")
                 .version("1.0")
-                .contact(new Contact("Joe Zou","http://github.com/zouyx", "yixian.zou@gmail.com"))
+                .contact(new Contact("J.Feng","https://github.com/zjfandroid/JFengTemplate", "zjfandroid@gmail.com"))
                 .build();
     }
 }
