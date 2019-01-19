@@ -1,0 +1,95 @@
+apply from:"./libraries.gradle"
+
+buildscript {
+	apply from:"./libraries.gradle"
+
+	repositories {
+		maven { url mavenCentralRepository }
+	}
+	dependencies {
+		classpath(libraries.springBootGradlePlugins)
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+apply plugin: 'sonar-runner'
+
+//sonar
+sonarRunner {
+	sonarProperties {
+		property "sonar.projectName", sonar_projectName
+		property "sonar.host.url", sonar_host_url
+		property "sonar.jdbc.url", sonar_jdbc_url
+		property "sonar.jdbc.driverClassName", sonar_jdbc_driverClassName
+		property "sonar.jdbc.username", sonar_jdbc_username
+		property "sonar.jdbc.password", sonar_jdbc_password
+		property "sonar.java.coveragePlugin", "jacoco"
+		property "sonar.jacoco.reportPath", "${buildDir.name}/jacoco/jacoco.exec"
+	}
+}
+
+sourceCompatibility=1.8
+targetCompatibility=1.8
+
+def env = System.getProperty("profile") ?: "dev"
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java' // 指定源码目录
+		}
+		resources {
+			srcDirs = ["src/main/resources"]
+		}
+	}
+	test {
+		java {
+			srcDir 'src/test/java' // 指定源码目录
+		}
+		resources {
+			srcDir 'src/test/resources' //资源目录
+		}
+	}
+}
+
+repositories {
+	maven { url mavenCentralRepository }
+}
+
+idea {
+	project {
+		languageLevel = '1.8'
+	}
+}
+
+jar {
+	exclude '**/application-system.properties'
+}
+
+dependencies {
+	compile(libraries.springBootStarterJetty)
+	compile(libraries.springBootStarterWeb)
+	compile(libraries.swagger2)
+	compile(libraries.swaggerUI)
+	compile("io.swagger:swagger-annotations:1.5.21")
+	compile("io.swagger:swagger-models:1.5.21")
+	compile(libraries.lombok)
+	compile(libraries.guava)
+	compile(libraries.fastjson)
+	compile(libraries.commonsLang)
+	compile(libraries.hamcrestAll)
+	compile(libraries.httpclient)
+	compile(libraries.commonsIO)
+	compile(libraries.mysqlConnetor)
+	compile(libraries.mybatisStarter)
+	compile(libraries.druid)
+	compile(libraries.jedis)
+	compile(libraries.pageinfo)
+	testCompile(libraries.springBootStarterTest)
+	testCompile(libraries.mysqlConnetor)
+}

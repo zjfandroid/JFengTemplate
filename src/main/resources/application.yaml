@@ -1,0 +1,39 @@
+server:
+  port: 9104
+  context-path: /jfDemoService
+
+spring:
+  application:
+    name: jf-demo-service
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      filter:
+        stat:
+          db-type: mysql
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 1000
+        wall:
+          config:
+            drop-table-allow: false
+          db-type: mysql
+          enabled: true
+      initialSize: 5
+      loginPassword: 123456798
+      loginUsername: admin
+      maxActive: 20
+      maxWait: 6000
+      minEvictableIdleTimeMillis: 300000
+      minIdle: 5
+      resetEnable: false
+      testOnBorrow: false
+      testOnReturn: false
+      testWhileIdle: true
+      timeBetweenEvictionRunsMillis: 60000
+      type: com.alibaba.druid.pool.DruidDataSource
+      validationQuery: SELECT 1 FROM DUAL
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+

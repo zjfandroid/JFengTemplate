@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_FILE" value="work/log/app.log"/>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!--生产配置，其他环境不需要特殊配置，直接打到stdout.log-->
+    <!--<logger name="org.apache.ibatis" level="DEBUG"/>-->
+    <!--<logger name="com.demo" level="DEBUG"/>-->
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+        <logger name="com.demo" level="INFO" additivity="false">
+            <appender-ref ref="FILE" />
+        </logger>
+    </springProfile>
+</configuration>
